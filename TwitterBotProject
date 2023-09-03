@@ -1,0 +1,43 @@
+import twitter4j.*;
+import twitter4j.auth.AccessToken;
+
+public class TwitterBot {
+    public static void main(String[] args) {
+        /* Set up your Twitter API credentials
+         The location of the API credentials would be a feature within developer.twitter
+         when or upon signing up, you'll be able to obtain both KEYS and TOKENS
+          Twitter Developer Dashboard (https://developer.twitter.com/en/apps)
+         */
+        String consumerKey = "YOUR_CONSUMER_KEY";
+        String consumerSecret = "YOUR_CONSUMER_SECRET";
+        String accessToken = "YOUR_ACCESS_TOKEN";
+        String accessTokenSecret = "YOUR_ACCESS_TOKEN_SECRET";
+
+        /* Set up your Twitter API credentials
+         The location of the API credentials would be a feature within developer.twitter
+         when or upon signing up, you'll be able to obtain both KEYS and TOKENS
+          Twitter Developer Dashboard (https://developer.twitter.com/en/apps)
+         */
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+            .setOAuthConsumerKey(consumerKey)
+            .setOAuthConsumerSecret(consumerSecret)
+            .setOAuthAccessToken(accessToken)
+            .setOAuthAccessTokenSecret(accessTokenSecret);
+
+        // Create a Twitter instance
+        TwitterFactory tf = new TwitterFactory(cb.build());
+        Twitter twitter = tf.getInstance();
+
+        // Your automation logic goes here
+        String tweetText = "Hello, Twitter! This is my automated news tweet.";
+        
+        try {
+            // Post a tweet
+            Status status = twitter.updateStatus(tweetText);
+            System.out.println("Successfully tweeted: " + status.getText());
+        } catch (TwitterException e) {
+            e.printStackTrace();
+        }
+    }
+}
