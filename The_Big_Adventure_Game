@@ -3,100 +3,98 @@ package com.example.The_Big_Adventure_Game;
 
 import java.util.Scanner; // Import the Scanner class
 
-public class The_Big_Adventure_Game {
+public class Adventure_Game {
 
-public static final int Power = 0;
-
-public static void main(String[] args) {
-    System.out.println("The Big Beginning to The Big Adventure Game!");
-    // Start the Game
-    startGame();
-}
-
-public static void startGame() {
-    // Game logic and the explanation of the game will 
-    // go here
-    GameState gameState = new GameState(); // Initialize GameState
-    boolean playing = true;
-    
-    System.out.println("Welcome to The Big Adventure Game!");
-    System.out.println("You are The Brave Adventurer exploring a mysterious land."); 
-    System.out.println("Your goal is to Surviuve and find treasures!");
-    
-    
-    while (playing) {
-        System.out.println("Health: " + gameState.getHealth()); // Display health
-        playing = getPlayerInput();
+    public static void main(String[] args) {
+        System.out.println("The Big Beginning to The Big Adventure Game!");
+        // Start the Game
+        startGame();
     }
-    System.out.println("Thanks for playing!");
-}
 
-public static boolean getPlayerInput() {
-    System.out.println("Choose an action: (1) Explore (2) Quit");
-    Scanner scanner = new Scanner(System.in);
-    int choice = scanner.nextInt();
+    public static void startGame() {
+        // Game logic and the explanation of the game will go here
+        GameState gameState = new GameState(); // Initialize GameState
+        boolean playing = true;
 
-    if (choice == 1) {
-        explore();
-        return true; // Continue playing
-    } else {
-        return false; // Stop playing
+        System.out.println("Welcome to Adventure Game!");
+        System.out.println("You are The Brave Adventurer exploring a mysterious land.");
+        System.out.println("Your goal is to Survive and find treasures!");
+
+        while (playing) {
+            System.out.println("Health: " + gameState.getHealth()); // Display health
+            playing = getPlayerInput();
+        }
+        System.out.println("Thanks for playing!");
     }
-}
 
-public static void explore() {
-    System.out.println("You are exploring a dark forest...");
-    // Add more exploration logic here
-    encounterBeast(); // Call the encounter method
-}
+    public static boolean getPlayerInput() {
+        System.out.println("Choose an action: (1) Explore (2) Quit");
+        Scanner scanner = new Scanner(System.in);
+        try {
+            int choice = scanner.nextInt();
+            if (choice == 1) {
+                explore();
+                return true; // Continue playing
+            } else {
+                return false; // Stop playing
+            }
+        } finally {
+            scanner.close(); // Always close the scanner to avoid resource leak
+        }
+    }
 
-public static void encounterBeast() {
-    System.out.println("You encounter a wild beast!");
-    // Add fight logic here
-}
+    public static void explore() {
+        System.out.println("You are exploring a dark forest...");
+        // Add more exploration logic here
+        encounterBeast(); // Call the encounter method
+    }
 
-public static void findTreasure() {
-    System.out.println("You found a hidden treasure!"); // Fixed missing semicolon
-    // Add treasure logic here
-}
+    public static void encounterBeast() {
+        System.out.println("You encounter a wild beast!");
+        // Add fight logic here
+    }
 
-public static class GameState { // Changed to static class
-    private int health;
-    private int gold;
-    private int hasPower;
-    private boolean hasTreasure;
-	private int Power;
-    
+    public static void findTreasure() {
+        System.out.println("You found a hidden treasure!");
+        // Add treasure logic here
+    }
 
-    public GameState() {
-        this.health = 250;
-        this.gold = 0;
-        this.hasPower = 100;
-        this.hasTreasure = false;
+    public static class GameState { // Changed to static class
+        private int health;
+        private int gold;
+        private int power; // Changed field name to avoid conflict with constant
         
-    }
 
-    // Getters and Setters
-    public int getHealth() {
-        return health;
-    }
+        public GameState() {
+            this.health = 250;
+            this.gold = 0;
+            this.power = 100; // Initialized power correctly
+            
+        }
 
- // Fixed parameter name
-    public void setHealth(int health) { 
-        this.health = health;
-    }
+        // Getters and Setters
+        public int getHealth() {
+            return health;
+        }
 
-    public int getGold() {
-        return gold;
-    }
+        public void setHealth(int health) {
+            this.health = health;
+        }
 
-    public void setGold(int gold) {
-        this.gold = gold;
-    }
-    public int getPower () {
-    	return Power;
-    }
-    public void setPower () {
-    	this.Power = Power;
+        public int getGold() {
+            return gold;
+        }
+
+        public void setGold(int gold) {
+            this.gold = gold;
+        }
+
+        public int getPower() {
+            return power;
+        }
+
+        public void setPower(int power) {
+            this.power = power; // Fixed setter for Power
+        }
     }
 }
